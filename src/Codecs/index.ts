@@ -2,6 +2,8 @@ export { boolCodec } from "./Bool";
 export { boolArrayCodec } from "./BoolArray";
 export { intCodec } from "./Int";
 export { uintCodec } from "./UInt";
+export { uintCodec as enumCodec } from "./UInt";
+export { uintArrayCodec as enumArrayCodec } from "./UIntArray";
 export { floatCodec } from "./Float";
 export { int64Codec } from "./Int64";
 export { uint64Codec } from "./UInt64";
@@ -34,6 +36,8 @@ import { boolCodec } from "./Bool";
 import { boolArrayCodec } from "./BoolArray";
 import { intCodec } from "./Int";
 import { uintCodec } from "./UInt";
+import { uintArrayCodec as enumArrayCodec } from "./UIntArray";
+import { uintCodec as enumCodec } from "./UInt";
 import { floatCodec } from "./Float";
 import { int64Codec } from "./Int64";
 import { uint64Codec } from "./UInt64";
@@ -63,6 +67,7 @@ import { string64ArrayCodec } from "./String64Array";
 
 export const scalarCodecs: Partial<Record<ScalarStructType, StructCodec<unknown>>> = {
   [StructType.Bool]: boolCodec,
+  [StructType.Enum]: enumCodec,
   [StructType.Int]: intCodec,
   [StructType.Float]: floatCodec,
   [StructType.UInt]: uintCodec,
@@ -81,6 +86,7 @@ export const scalarCodecs: Partial<Record<ScalarStructType, StructCodec<unknown>
 
 export const arrayCodecs: Partial<Record<ArrayStructType, StructCodec<unknown>>> = {
   [StructType.BoolArray]: boolArrayCodec,
+  [StructType.EnumArray]: enumArrayCodec,
   [StructType.IntArray]: intArrayCodec,
   [StructType.FloatArray]: floatArrayCodec,
   [StructType.UIntArray]: uintArrayCodec,

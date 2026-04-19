@@ -1,6 +1,6 @@
 {
   "name": "gamedatalib",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Package for reading and writing nintendo gamedata files",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.mjs",
@@ -28,10 +28,10 @@
   "author": "McSpazzy",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.4.5",
+    "@types/node": "^25.6.0",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.1.6"
+    "typescript": "^6.0.3"
   },
   "repository": {
     "type": "git",

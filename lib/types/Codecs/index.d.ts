@@ -2,6 +2,8 @@ export { boolCodec } from "./Bool";
 export { boolArrayCodec } from "./BoolArray";
 export { intCodec } from "./Int";
 export { uintCodec } from "./UInt";
+export { uintCodec as enumCodec } from "./UInt";
+export { uintArrayCodec as enumArrayCodec } from "./UIntArray";
 export { floatCodec } from "./Float";
 export { int64Codec } from "./Int64";
 export { uint64Codec } from "./UInt64";

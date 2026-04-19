@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.4] - 2026-04-20
+
+- Fix missing enum parsers
+
+
 ## [0.0.3] - 2026-04-20
 
 - Add toArrayBuffer
