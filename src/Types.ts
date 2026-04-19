@@ -1,4 +1,4 @@
-export type StructStorage = "value" | "offset";
+import { GameData } from "./GameData";
 
 export enum StructType {
   Bool = 0x00,
@@ -37,8 +37,8 @@ export enum StructType {
 }
 
 export type StructMetadata = {
-  section: keyof ParsedGameData;
-  storage: StructStorage;
+  section: keyof GameData;
+  storage: "value" | "offset";
   hasCount: boolean;
   isArray: boolean;
 };
@@ -85,6 +85,7 @@ type ArrayValueTypeMap = {
 };
 
 export type StructArrayValueByType<T extends StructType> = T extends ArrayStructType ? ArrayValueTypeMap[T] : never;
+export type StructArrayElementValueByType<T extends StructType> = T extends ArrayStructType ? StructArrayValueByType<T>[number] : never;
 
 export const STRUCT_TYPE_METADATA: Record<StructType, StructMetadata> = {
   [StructType.Bool]: { section: "Bool", storage: "value", hasCount: false, isArray: false },
@@ -150,13 +151,49 @@ export interface StructBase<T extends StructType> {
 }
 
 export interface StructScalar<T extends ScalarStructType> extends StructBase<T> {
+  /**
+   * Gets the scalar value for this struct entry.
+   */
   get value(): StructValueByType<T>;
+  /**
+   * Sets the scalar value for this struct entry.
+   * @param value - The value to write.
+   */
   set value(value: StructValueByType<T>);
+  /**
+   * Alias for {@link value}. Returns the scalar value for this struct entry.
+   */
+  getValue(): StructValueByType<T>;
+  /**
+   * Alias for setting {@link value}. Writes a new scalar value for this struct entry.
+   * @param value - The value to write.
+   */
+  setValue(value: StructValueByType<T>): void;
 }
 
 export interface StructArray<T extends ArrayStructType> extends StructBase<T> {
+  /**
+   * Reads the full array value for this struct entry.
+   * Returns a new array instance.
+   */
   get values(): StructArrayValueByType<T>;
+  /**
+   * Replaces the full array value for this struct entry.
+   */
   set values(values: StructArrayValueByType<T>);
+  /**
+   * Gets the value at a specific index in the array entry.
+   */
+  getValueAt(index: number): StructArrayElementValueByType<T>;
+  /**
+   * Sets the value at a specific index in the array entry.
+   * @param index - Zero-based index in the array.
+   * @param value - Value to write.
+   */
+  setValueAt(index: number, value: StructArrayElementValueByType<T>): void;
+  /**
+   * Gets the persisted array entry length.
+   */
   readonly count: number;
 }
 
@@ -165,78 +202,5 @@ export type StructCodec<T> = {
   write(view: DataView, offset: number, value: T): void;
 };
 
-export type ParsedGameData = {
-  Bool: Record<number, Struct<StructType.Bool>>;
-  BoolArray: Record<number, Struct<StructType.BoolArray>>;
-  Int: Record<number, Struct<StructType.Int>>;
-  IntArray: Record<number, Struct<StructType.IntArray>>;
-  Float: Record<number, Struct<StructType.Float>>;
-  FloatArray: Record<number, Struct<StructType.FloatArray>>;
-  Enum: Record<number, Struct<StructType.Enum>>;
-  EnumArray: Record<number, Struct<StructType.EnumArray>>;
-  Vector2: Record<number, Struct<StructType.Vector2>>;
-  Vector2Array: Record<number, Struct<StructType.Vector2Array>>;
-  Vector3: Record<number, Struct<StructType.Vector3>>;
-  Vector3Array: Record<number, Struct<StructType.Vector3Array>>;
-  String16: Record<number, Struct<StructType.String16>>;
-  String16Array: Record<number, Struct<StructType.String16Array>>;
-  String32: Record<number, Struct<StructType.String32>>;
-  String32Array: Record<number, Struct<StructType.String32Array>>;
-  String64: Record<number, Struct<StructType.String64>>;
-  String64Array: Record<number, Struct<StructType.String64Array>>;
-  Binary: Record<number, Struct<StructType.Binary>>;
-  BinaryArray: Record<number, Struct<StructType.BinaryArray>>;
-  UInt: Record<number, Struct<StructType.UInt>>;
-  UIntArray: Record<number, Struct<StructType.UIntArray>>;
-  Int64: Record<number, Struct<StructType.Int64>>;
-  Int64Array: Record<number, Struct<StructType.Int64Array>>;
-  UInt64: Record<number, Struct<StructType.UInt64>>;
-  UInt64Array: Record<number, Struct<StructType.UInt64Array>>;
-  WString16: Record<number, Struct<StructType.WString16>>;
-  WString16Array: Record<number, Struct<StructType.WString16Array>>;
-  WString32: Record<number, Struct<StructType.WString32>>;
-  WString32Array: Record<number, Struct<StructType.WString32Array>>;
-  WString64: Record<number, Struct<StructType.WString64>>;
-  WString64Array: Record<number, Struct<StructType.WString64Array>>;
-  Bool64bitKey: Record<number, Struct<StructType.Bool64bitKey>>;
-};
-
-export const createEmptyParsedGameData = (): ParsedGameData => ({
-  Bool: {},
-  BoolArray: {},
-  Int: {},
-  IntArray: {},
-  Float: {},
-  FloatArray: {},
-  Enum: {},
-  EnumArray: {},
-  Vector2: {},
-  Vector2Array: {},
-  Vector3: {},
-  Vector3Array: {},
-  String16: {},
-  String16Array: {},
-  String32: {},
-  String32Array: {},
-  String64: {},
-  String64Array: {},
-  Binary: {},
-  BinaryArray: {},
-  UInt: {},
-  UIntArray: {},
-  Int64: {},
-  Int64Array: {},
-  UInt64: {},
-  UInt64Array: {},
-  WString16: {},
-  WString16Array: {},
-  WString32: {},
-  WString32Array: {},
-  WString64: {},
-  WString64Array: {},
-  Bool64bitKey: {},
-});
-
 export type Vector2 = { x: number; y: number };
 export type Vector3 = { x: number; y: number; z: number };
-
