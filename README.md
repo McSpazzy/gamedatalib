@@ -1,1 +1,3 @@
 # gamedatalib
+
+** Parses gamedata files **

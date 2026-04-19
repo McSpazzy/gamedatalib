@@ -1,0 +1,44 @@
+{
+  "name": "gamedatalib",
+  "version": "0.0.2",
+  "description": "Package for reading and writing nintendo gamedata files",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.mjs",
+  "types": "./lib/types/index.d.ts",
+  "files": [
+    "lib/**",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "import": "./lib/esm/index.mjs",
+      "require": "./lib/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs && npm run build:types",
+    "build:esm": "tsup src/*.ts --format esm --outDir lib/esm --clean --splitting false",
+    "build:cjs": "tsup src/*.ts --format cjs --outDir lib/cjs --clean",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationMap false --outDir lib/types --rootDir src",
+    "test": "npm run test-read && npm run test-json"
+  },
+  "author": "McSpazzy",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.4.5",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/McSpazzy/gamedatalib.git"
+  },
+  "homepage": "https://github.com/McSpazzy/gamedatalib",
+  "bugs": {
+    "url": "https://github.com/McSpazzy/gamedatalib/issues"
+  }
+}
