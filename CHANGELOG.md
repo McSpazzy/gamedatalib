@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.0.5] - 2026-04-21
+
+- Fix incorrect byte count on utf8 strings
+
+
 ## [0.0.4] - 2026-04-20
 
 - Fix missing enum parsers

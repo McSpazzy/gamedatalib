@@ -1,6 +1,6 @@
 import { StructCodec } from "../Types";
 
-const MAX_BYTES = 0x40;
+const MAX_BYTES = 0x20;
 
 export const string32Codec: StructCodec<string> = {
   read: (view, offset) => {
