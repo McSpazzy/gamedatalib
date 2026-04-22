@@ -7,9 +7,11 @@ import "./prototypes";
 
 export class GameData extends BaseGameData {
   #parsedByteLength: number | undefined;
+  version: number = 0;
 
-  constructor() {
+  constructor(version: number = 1) {
     super();
+    this.version = version;
   }
 
   public static toArrayBuffer(gameData: GameData): ArrayBufferLike {
@@ -70,6 +72,8 @@ export class GameData extends BaseGameData {
     const view = new DataView(buffer);
 
     view.setUint32(0, 0x01020304, true);
+    view.setUint32(4, gameData.version, true);
+
     view.setUint32(0x8, dataOffset, true);
 
     let indexCursor = headerSize;
@@ -157,6 +161,9 @@ export class GameData extends BaseGameData {
     if (view.getUint32(0, true) !== 0x01020304) {
       throw new Error("Invalid File. Magic Mismatch.");
     }
+
+    const version = view.getUint32(4, true);
+    gameData.version = version;
 
     const dataOffset = view.getUint32(0x8, true);
 

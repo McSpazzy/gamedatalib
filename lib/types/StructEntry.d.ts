@@ -4,6 +4,7 @@ export declare class StructEntry<TType extends StructType> {
     structType: TType;
     hash: number;
     readIndex?: number;
+    offset: number;
     constructor(view: DataView, type: TType, hash: number, offset: number, readIndex?: number);
     get value(): TType extends ScalarStructType ? StructValueByType<Extract<TType, ScalarStructType>> : never;
     /**

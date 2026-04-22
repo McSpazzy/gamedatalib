@@ -2,7 +2,8 @@ import { BaseGameData } from "./BaseGameData";
 import "./prototypes";
 export declare class GameData extends BaseGameData {
     #private;
-    constructor();
+    version: number;
+    constructor(version?: number);
     static toArrayBuffer(gameData: GameData): ArrayBufferLike;
     static fromArrayBuffer(buffer: ArrayBufferLike): GameData;
 }

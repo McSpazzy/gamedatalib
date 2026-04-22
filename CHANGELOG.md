@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1] - 2026-04-23
+
+- Add offset property to StructEntry for files created via fromArrayBuffer
+
+- Fix version number not being read/set
+
+
 ## [0.1.0] - 2026-04-22
 
 Overhaul of the system to no longer use the original buffer as backing array.

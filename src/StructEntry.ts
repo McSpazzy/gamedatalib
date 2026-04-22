@@ -9,12 +9,14 @@ export class StructEntry<TType extends StructType> {
   structType: TType;
   hash: number = 0;
   readIndex?: number;
+  offset: number;
 
   constructor(view: DataView, type: TType, hash: number, offset: number, readIndex?: number) {
     this.structType = type;
     this.hash = hash;
     this.#arrayCount = 0;
     this.readIndex = readIndex;
+    this.offset = offset;
 
     if (this.structType === StructType.Bool64bitKey && offset === 0) {
       const arrayCodec = arrayCodecs[this.structType as ArrayStructType];

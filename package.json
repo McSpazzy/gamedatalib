@@ -1,6 +1,6 @@
 {
   "name": "gamedatalib",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Package for reading and writing nintendo gamedata files",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.mjs",
