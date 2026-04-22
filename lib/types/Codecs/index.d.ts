@@ -1,5 +1,6 @@
 export { boolCodec } from "./Bool";
 export { boolArrayCodec } from "./BoolArray";
+export { bool64bitKeyCodec } from "./Bool64bitKey";
 export { intCodec } from "./Int";
 export { uintCodec } from "./UInt";
 export { uintCodec as enumCodec } from "./UInt";

@@ -9,4 +9,5 @@ export const wString64Codec: StructCodec<string> = {
   write: (view, offset, value) => {
     view.setNullTerminatedUtf16String(offset, value, MAX_BYTES, true);
   },
+  byteLength: (_value) => MAX_BYTES,
 };

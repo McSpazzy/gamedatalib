@@ -1,5 +1,6 @@
 export { boolCodec } from "./Bool";
 export { boolArrayCodec } from "./BoolArray";
+export { bool64bitKeyCodec } from "./Bool64bitKey";
 export { intCodec } from "./Int";
 export { uintCodec } from "./UInt";
 export { uintCodec as enumCodec } from "./UInt";
@@ -34,6 +35,7 @@ export { string64ArrayCodec } from "./String64Array";
 import { StructCodec, StructType, ScalarStructType, ArrayStructType } from "../Types";
 import { boolCodec } from "./Bool";
 import { boolArrayCodec } from "./BoolArray";
+import { bool64bitKeyCodec } from "./Bool64bitKey";
 import { intCodec } from "./Int";
 import { uintCodec } from "./UInt";
 import { uintArrayCodec as enumArrayCodec } from "./UIntArray";
@@ -101,4 +103,5 @@ export const arrayCodecs: Partial<Record<ArrayStructType, StructCodec<unknown>>>
   [StructType.WString16Array]: wString16ArrayCodec,
   [StructType.WString32Array]: wString32ArrayCodec,
   [StructType.WString64Array]: wString64ArrayCodec,
+  [StructType.Bool64bitKey]: bool64bitKeyCodec,
 };

@@ -11,4 +11,5 @@ export const vector2Codec: StructCodec<Vector2Type> = {
     view.setFloat32(offset, value.x, true);
     view.setFloat32(offset + 4, value.y, true);
   },
+  byteLength: (_value) => 8,
 };

@@ -24,4 +24,5 @@ export const wString32ArrayCodec: StructCodec<string[]> = {
       cursor += MAX_BYTES;
     }
   },
+  byteLength: (value) => 4 + value.length * MAX_BYTES,
 };

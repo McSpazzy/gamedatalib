@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0] - 2026-04-22
+
+Overhaul of the system to no longer use the original buffer as backing array.
+
+- Add ability to correctly create new gamedata files.
+
+
 ## [0.0.5] - 2026-04-21
 
 - Fix incorrect byte count on utf8 strings

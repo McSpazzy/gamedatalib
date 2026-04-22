@@ -9,4 +9,5 @@ export const string32Codec: StructCodec<string> = {
   write: (view, offset, value) => {
     view.setNullTerminatedUtf8String(offset, value, MAX_BYTES);
   },
+  byteLength: (_value) => MAX_BYTES,
 };

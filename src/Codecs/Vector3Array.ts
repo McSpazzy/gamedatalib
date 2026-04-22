@@ -29,4 +29,5 @@ export const vector3ArrayCodec: StructCodec<Vector3Type[]> = {
       cursor += VECTOR3_SIZE;
     }
   },
+  byteLength: (value) => 4 + value.length * VECTOR3_SIZE,
 };

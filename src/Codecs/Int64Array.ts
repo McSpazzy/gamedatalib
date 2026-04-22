@@ -9,4 +9,5 @@ export const int64ArrayCodec: StructCodec<bigint[]> = {
     view.setUint32(offset, value.length, true);
     view.setBigInt64Array(offset + 4, value, true);
   },
+  byteLength: (value) => 4 + value.length * 8,
 };

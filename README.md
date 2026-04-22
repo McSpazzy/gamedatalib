@@ -25,6 +25,24 @@ fs.writeFileSync("miiOut.sav", Buffer.from(dataOut));
 
 ```
 
+## Creating a new file from scratch
+
+Start with a new `GameData` instance, add entries via `addNew`, then serialize with `toArrayBuffer`.
+
+```ts
+import fs from "node:fs";
+import { GameData, hash } from "gamedatalib";
+
+const save = new GameData();
+
+save.Int.addNew(hash("Player.Level"), 42);
+save.BoolArray.addNew(hash("Player.Flags"), [true, false, true]);
+save.WString32.addNew(hash("Player.Name"), "Alex");
+
+const out = GameData.toArrayBuffer(save);
+fs.writeFileSync("new.sav", Buffer.from(out));
+```
+
 ## Struct entries
 
 ```ts

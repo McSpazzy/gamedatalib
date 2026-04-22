@@ -28,4 +28,5 @@ export const vector2ArrayCodec: StructCodec<Vector2Type[]> = {
       cursor += VECTOR2_SIZE;
     }
   },
+  byteLength: (value) => 4 + value.length * VECTOR2_SIZE,
 };

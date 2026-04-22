@@ -45,4 +45,5 @@ export const boolArrayCodec: StructCodec<boolean[]> = {
       view.setUint32(bitsOffset + i * 4, word >>> 0, true);
     }
   },
+  byteLength: (value) => 4 + Math.ceil(value.length / 32) * 4,
 };

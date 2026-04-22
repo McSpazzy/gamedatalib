@@ -26,23 +26,14 @@ export const binaryArrayCodec: StructCodec<Uint8Array[]> = {
 
     let cursor = offset + 4;
     for (const item of value) {
-      const currentSize = view.getUint32(cursor, true);
-
-      if (item.length > currentSize) {
-        throw new Error(`BinaryArray item exceeds existing size (${currentSize} bytes); in-place updates cannot grow the entry`);
-      }
-
       view.setUint32(cursor, item.length, true);
       const dataOffset = cursor + 4;
 
       for (let i = 0; i < item.length; i++) {
         view.setUint8(dataOffset + i, item[i]);
       }
-      for (let i = item.length; i < currentSize; i++) {
-        view.setUint8(dataOffset + i, 0);
-      }
-
-      cursor = dataOffset + currentSize;
+      cursor = dataOffset + item.length;
     }
   },
+  byteLength: (value) => 4 + value.reduce((sum, bytes) => sum + 4 + bytes.length, 0),
 };

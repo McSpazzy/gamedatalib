@@ -3,8 +3,8 @@ export declare class StructEntry<TType extends StructType> {
     #private;
     structType: TType;
     hash: number;
-    offset: number;
-    constructor(view: DataView, type: TType, hash: number, offset: number);
+    readIndex?: number;
+    constructor(view: DataView, type: TType, hash: number, offset: number, readIndex?: number);
     get value(): TType extends ScalarStructType ? StructValueByType<Extract<TType, ScalarStructType>> : never;
     /**
      * Alias for {@link value}. Gets the scalar value for this struct entry.
@@ -29,5 +29,6 @@ export declare class StructEntry<TType extends StructType> {
      */
     setValueAt(index: number, value: TType extends ArrayStructType ? StructArrayElementValueByType<Extract<TType, ArrayStructType>> : never): void;
     get count(): TType extends ArrayStructType ? number : never;
+    getSize(): number;
     private isArrayType;
 }

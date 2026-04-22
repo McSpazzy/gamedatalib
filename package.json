@@ -1,6 +1,6 @@
 {
   "name": "gamedatalib",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Package for reading and writing nintendo gamedata files",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.mjs",
@@ -40,5 +40,8 @@
   "homepage": "https://github.com/McSpazzy/gamedatalib",
   "bugs": {
     "url": "https://github.com/McSpazzy/gamedatalib/issues"
+  },
+  "dependencies": {
+    "yaml": "^2.8.3"
   }
 }

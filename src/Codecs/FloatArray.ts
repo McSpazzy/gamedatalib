@@ -9,4 +9,5 @@ export const floatArrayCodec: StructCodec<number[]> = {
     view.setUint32(offset, value.length, true);
     view.setFloat32Array(offset + 4, value, true);
   },
+  byteLength: (value) => 4 + value.length * 4,
 };

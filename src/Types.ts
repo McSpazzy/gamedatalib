@@ -86,6 +86,7 @@ type ArrayValueTypeMap = {
 
 export type StructArrayValueByType<T extends StructType> = T extends ArrayStructType ? ArrayValueTypeMap[T] : never;
 export type StructArrayElementValueByType<T extends StructType> = T extends ArrayStructType ? StructArrayValueByType<T>[number] : never;
+export type StructPayloadByType<T extends StructType> = T extends ScalarStructType ? StructValueByType<T> : T extends ArrayStructType ? StructArrayValueByType<T> : never;
 
 export const STRUCT_TYPE_METADATA: Record<StructType, StructMetadata> = {
   [StructType.Bool]: { section: "Bool", storage: "value", hasCount: false, isArray: false },
@@ -147,7 +148,7 @@ export type ArrayStructType = keyof ArrayValueTypeMap & StructType;
 export interface StructBase<T extends StructType> {
   structType: T;
   hash: number;
-  offset: number;
+  getSize(): number;
 }
 
 export interface StructScalar<T extends ScalarStructType> extends StructBase<T> {
@@ -200,6 +201,7 @@ export interface StructArray<T extends ArrayStructType> extends StructBase<T> {
 export type StructCodec<T> = {
   read(view: DataView, offset: number): T;
   write(view: DataView, offset: number, value: T): void;
+  byteLength(value: T): number;
 };
 
 export type Vector2 = { x: number; y: number };

@@ -13,4 +13,5 @@ export const vector3Codec: StructCodec<Vector3Type> = {
     view.setFloat32(offset + 4, value.y, true);
     view.setFloat32(offset + 8, value.z, true);
   },
+  byteLength: (_value) => 12,
 };
